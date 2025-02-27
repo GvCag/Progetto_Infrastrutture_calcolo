@@ -1,0 +1,6 @@
+uvicorn
+pandas
+matplotlib
+fastapi
+httpx
+pathlib

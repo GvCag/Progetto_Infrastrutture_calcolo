@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+  database:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=bioinformatica
+      - MYSQL_DATABASE=bioinfo_db
+      - MYSQL_USER=userbioinfo
+      - MYSQL_PASSWORD=bioi
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - gianvito
+
+  data_cleaning:
+    image: microservizio_data_cleaning
+    container_name: data_cleaning
+    depends_on:
+      - database
+    ports:
+      - "8001:8000"
+    networks:
+      - gianvito
+
+  analisi_esplorativa:
+    image: microservizio_analisi_esplorativa
+    container_name: analisi_esplorativa
+    depends_on:
+      - database
+    ports:
+      - "8002:8000"
+    networks:
+      - gianvito
+
+  modello_ml:
+    image: microservizio_modello_ml
+    container_name: modello_ml
+    depends_on:
+      - database
+    ports:
+      - "8003:8000"
+    networks:
+      - gianvito
+
+  gestione_risultato:
+    image: microservizio_risultato
+    container_name: gestione_risultato
+    depends_on:
+      - database
+    ports:
+      - "8004:8000"
+    networks:
+      - gianvito
+
+volumes:
+  mysql_data:
+
+networks:
+  gianvito:
+    driver: bridge
