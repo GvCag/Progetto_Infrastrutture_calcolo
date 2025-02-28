@@ -7,3 +7,5 @@ Progetto Infrastrutture di calcolo
 Corso Bioinformatica 2025
 
 Prof. Giacinto Donvito
+
+Link al dataset di partenza: https://github.com/Granturco0/Cardio_Disease
